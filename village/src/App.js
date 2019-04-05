@@ -6,6 +6,7 @@ import Smurfs from './components/Smurfs';
 import axios from 'axios';
 import { BrowserRouter as Router, Route, Link,NavLink } from 'react-router-dom';
 import styled, { css } from 'styled-components';
+import Smurf from './components/Smurf'
 
 const Snav = styled.nav`
   display:flex;
@@ -65,6 +66,8 @@ class App extends Component {
         console.log(err);
       });
   }
+
+  
   // add any needed code to ensure that the smurfs collection exists on state and it has data coming from the server
   // Notice what your map function is looping over and returning inside of Smurfs.
   // You'll need to make sure you have the right properties on state and pass them down to props.
@@ -79,6 +82,7 @@ class App extends Component {
         </div>
         <Route exact path='/' render = {(props) =><Smurfs {...props} smurfs={this.state.smurfs}/>}></Route>
         <Route exact path='/smurf-form' render = {(props) =><SmurfForm {...props} addMySmurf={this.addMySmurf}/>}></Route>
+        <Route exact path='/smurf/:id' render = {(props) =><Smurf {...props}/>}></Route>
         
         
       </div>
