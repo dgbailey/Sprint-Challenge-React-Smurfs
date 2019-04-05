@@ -4,7 +4,36 @@ import './App.css';
 import SmurfForm from './components/SmurfForm';
 import Smurfs from './components/Smurfs';
 import axios from 'axios';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link,NavLink } from 'react-router-dom';
+import styled, { css } from 'styled-components';
+
+const Snav = styled.nav`
+  display:flex;
+  height:100px;
+  margin:20px;
+  justify-content:space-between;
+
+  a{
+    text-decoration:none;
+    padding:20px;
+
+
+  }
+
+  
+
+  a:visited{
+    text-decoration:none;
+  }
+  a.active .fill{
+    color: blue;
+    background:yellow;
+  }
+
+`
+
+
+
 
 class App extends Component {
   constructor(props) {
@@ -43,12 +72,12 @@ class App extends Component {
     return (
       <div className="App">
         <div className="nav-container">
-          <nav>
-            <Link to='/'>Smurfs</Link>
-            <Link to='/smurf-form'>Add Smurf</Link>
-          </nav>
+          <Snav>
+            <NavLink to='/'><span className='fill'>Smurfs</span></NavLink>
+            <NavLink to='/smurf-form'><span className='fill'>Add Smurf</span></NavLink>
+          </Snav>
         </div>
-        <Route path='/' render = {(props) =><Smurfs {...props} smurfs={this.state.smurfs}/>}></Route>
+        <Route exact path='/' render = {(props) =><Smurfs {...props} smurfs={this.state.smurfs}/>}></Route>
         <Route exact path='/smurf-form' render = {(props) =><SmurfForm {...props} addMySmurf={this.addMySmurf}/>}></Route>
         
         

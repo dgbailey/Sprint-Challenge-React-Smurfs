@@ -1,13 +1,24 @@
 import React, { Component } from 'react';
 
 import Smurf from './Smurf';
+import styled, { css } from 'styled-components';
+
+const SGrid = styled.ul`
+
+  display:grid;
+  grid-template-columns: repeat(4,180px);
+  padding: 20px;
+  width: 800px;
+  margin: 100px auto 400px;
+  
+`
 
 class Smurfs extends Component {
   render() {
     return (
-      <div className="Smurfs">
+      <div className='container'>
         <h1>Smurf Village</h1>
-        <ul>
+        <SGrid>
           {this.props.smurfs.map(smurf => {
             return (
               <Smurf
@@ -19,7 +30,7 @@ class Smurfs extends Component {
               />
             );
           })}
-        </ul>
+        </SGrid>
       </div>
     );
   }
