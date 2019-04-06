@@ -6,7 +6,7 @@ import Smurfs from './components/Smurfs';
 import axios from 'axios';
 import { BrowserRouter as Router, Route, Link,NavLink } from 'react-router-dom';
 import styled, { css } from 'styled-components';
-import Smurf from './components/Smurf'
+import SmurfInfo from './components/SmurfInfo';
 
 const Snav = styled.nav`
   display:flex;
@@ -41,6 +41,7 @@ class App extends Component {
     super(props);
     this.state = {
       smurfs: [],
+      selected:[]
     };
   }
 
@@ -52,6 +53,9 @@ class App extends Component {
     .catch(err => {console.log(err)})
   }
 
+  copySelected(details){
+    this.setState({selected:details})
+  }
 
   addMySmurf = newSmurf => {
     axios
@@ -72,6 +76,7 @@ class App extends Component {
   // Notice what your map function is looping over and returning inside of Smurfs.
   // You'll need to make sure you have the right properties on state and pass them down to props.
   render() {
+    console.log('render app')
     return (
       <div className="App">
         <div className="nav-container">
@@ -80,12 +85,17 @@ class App extends Component {
             <NavLink to='/smurf-form'><span className='fill'>Add Smurf</span></NavLink>
           </Snav>
         </div>
-        <Route exact path='/' render = {(props) =><Smurfs {...props} smurfs={this.state.smurfs}/>}></Route>
+        <Route path='/' render = {(props) =><Smurfs {...props} smurfs={this.state.smurfs}/>}></Route>
         <Route exact path='/smurf-form' render = {(props) =><SmurfForm {...props} addMySmurf={this.addMySmurf}/>}></Route>
-        <Route exact path='/smurf/:id' render = {(props) =><Smurf {...props}/>}></Route>
+        
         
         
       </div>
+      //DUSTIN if the component does not re render neither will your route.
+      //This is helpful for understanding why moving to a new url doesn not result in any
+      //component on the page
+      //you cant rely on the state of components that will not be rendered in the route to which you are navigating 
+      //Nav bar is always there, you could try setting state there.
     );
   }
 }

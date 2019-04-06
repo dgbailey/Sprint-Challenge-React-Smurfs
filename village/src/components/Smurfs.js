@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-
+import { BrowserRouter as Router, Route, Link,NavLink } from 'react-router-dom';
 import Smurf from './Smurf';
 import styled, { css } from 'styled-components';
+import SmurfInfo from './SmurfInfo';
 
 const SGrid = styled.ul`
 
@@ -14,14 +15,20 @@ const SGrid = styled.ul`
 `
 
 class Smurfs extends Component {
+  
+
+  
   render() {
+    console.log('render-smurf')
     return (
       <div className='container'>
         <h1>Smurf Village</h1>
         <SGrid>
           {this.props.smurfs.map(smurf => {
             return (
+              
               <Smurf
+
                 name={smurf.name}
                 id={smurf.id}
                 age={smurf.age}
@@ -30,8 +37,11 @@ class Smurfs extends Component {
               />
             );
           })}
+          
         </SGrid>
+        
       </div>
+      
     );
   }
 }

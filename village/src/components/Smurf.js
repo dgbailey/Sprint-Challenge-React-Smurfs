@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styled, { css } from 'styled-components';
 import { BrowserRouter as Router, Route, Link,NavLink } from 'react-router-dom';
 import axios from 'axios';
+import SmurfInfo from './SmurfInfo';
 
 const SmurfFrame = styled.div`
 -webkit-clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);
@@ -31,14 +32,19 @@ clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);  margin:1
 
 class Smurf extends Component{
   constructor(props){
+    
     super(props);
-    this.state ={
-      age:this.props.age,
-      height:this.props.height,
-      name:this.props.name
-    }
+    console.log('constructor smurf')
+    this.state = {props}
+     
+    
   }
 
+  // componentDidMount(){
+  //   this.setState(this.props.selected);
+  //   console.log('smurf props',this.props)
+  //   console.log('smurf mounted')
+  // }
   // getMySmurf (){
   //   this.setState({age:this.props.age,
   //     height:this.props.height,
@@ -61,29 +67,36 @@ class Smurf extends Component{
     //   });
   
 
-  componentWillUpdate(newProps){
-    console.log('new bigVanity',newProps)
-    console.log('old bigVanity',this.state.data)
-    console.log('update running');
-    if(this.state.data !== newProps.portraitData){
-       this.setState({
-           data:newProps.portraitData
+  // componentWillUpdate(newProps){
+  //   console.log('new bigVanity',newProps)
+  //   console.log('old bigVanity',this.state.data)
+  //   console.log('update running');
+  //   if(this.state.data !== newProps.portraitData){
+  //      this.setState({
+  //          data:newProps.portraitData
 
-       })
-  }
+  //      })
+  // }
 
-}
+
   render(){
+    console.log('render-smurf')
+    console.log('smurf props',this.props)
     return (
 
       
-      <SmurfFrame >
-        <Link to={`/smurf/${this.state.id}`}>
-        <h3>{this.state.name}</h3>
-        <strong>{this.state.height} tall</strong>
-        <p>{this.state.age} smurf years old</p>
-        </Link>
-      </SmurfFrame>
+        <SmurfFrame>
+          <Link to={`/smurf/${this.props.id}`}>
+          <h3>{this.props.name}</h3>
+          <strong>{this.props.height} tall</strong>
+          <p>{this.props.age} smurf years old</p>
+          </Link>
+          <Route path='/smurf/:id' render={(props) => <SmurfInfo smurfs={this.props} {...props}/>}></Route>
+        </SmurfFrame>
+       
+      
+      
+      
       
     );
     }
