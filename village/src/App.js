@@ -85,9 +85,9 @@ class App extends Component {
             <NavLink to='/smurf-form'><span className='fill'>Add Smurf</span></NavLink>
           </Snav>
         </div>
-        <Route path='/' render = {(props) =><Smurfs {...props} smurfs={this.state.smurfs}/>}></Route>
+        <Route exact path='/' render = {(props) =><Smurfs {...props} smurfs={this.state.smurfs}/>}></Route>
         <Route exact path='/smurf-form' render = {(props) =><SmurfForm {...props} addMySmurf={this.addMySmurf}/>}></Route>
-        
+        <Route path='/smurf/:id' render={(props) => <SmurfInfo smurfs={this.state.smurfs} {...props}/>}></Route>
         
         
       </div>

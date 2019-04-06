@@ -25,12 +25,15 @@ clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);  margin:1
 const SmurfInfo = (props) =>{
     console.log('render SmurfInfo');
     console.log(props)
+    const smurf = props.smurfs.find(smu => {
+        return `${smu.id}`=== props.match.params.id})
+  
     return(
         <SmurfFrame >
             
-            <h3>{props.name}</h3>
-            <strong>{props.height} tall</strong>
-            <p>{props.age} smurf years old</p>
+            <h3>{smurf.name}</h3>
+            <strong>{smurf.height} tall</strong>
+            <p>{smurf.age} smurf years old</p>
             
         
         </SmurfFrame>

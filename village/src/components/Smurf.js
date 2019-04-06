@@ -82,6 +82,7 @@ class Smurf extends Component{
   render(){
     console.log('render-smurf')
     console.log('smurf props',this.props)
+    
     return (
 
       
@@ -91,7 +92,7 @@ class Smurf extends Component{
           <strong>{this.props.height} tall</strong>
           <p>{this.props.age} smurf years old</p>
           </Link>
-          <Route path='/smurf/:id' render={(props) => <SmurfInfo smurfs={this.props} {...props}/>}></Route>
+          
         </SmurfFrame>
        
       
